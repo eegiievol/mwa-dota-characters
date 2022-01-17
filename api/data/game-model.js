@@ -8,7 +8,8 @@ const matchSchema= mongoose.Schema({
     },
     date: {
         type: Date,
-        required : true
+        required : true,
+        default: Date.now,
     },
     matchmaking: {
         type: String, //ranked, normal, bots etc..
@@ -37,7 +38,7 @@ const heroSchema = mongoose.Schema({
         type: String,
         required : true
     },
-    matches: [matchSchema]
+    match: matchSchema
 });
 
 mongoose.model(process.env.DB_HEROES_MODEL, heroSchema, "heroes");

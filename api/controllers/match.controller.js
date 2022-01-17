@@ -3,25 +3,49 @@ const res = require("express/lib/response");
 const mongoose = require("mongoose");
 const Match = mongoose.model(process.env.DB_HEROES_MODEL);
 
-addOne = function(req,res) {
+addOne = function (req, res) {
     console.log("Match addone called");
-    const newdate = req.body.date
-    if (!newdate){const newdate = Date.now();}
-    const newmatch = {
-        region: req.body.region,
-        date: newdate,
-        matchmaking: req.body.matchmaking,
-        winner: req.body.winner
-    }
 
-    Match.create(newmatch, function (err, match) {
-        if (err) {
-            res.status(500).json(err);
-        }
-        else {
-            res.status(200).json(match);
-        }
-    });
+    const heroId = req.params.heroId;
+
+    Match
+        .findById(heroId)
+        .select("match")
+        .exec(function (err, game) {
+            const response = {
+                status: 201,
+                message: game,
+            };
+
+            if (err) {
+                console.log("Add match Exec ERROR")
+                response.status = 500;
+                response.message = err;
+            }
+            else if (!game) {
+                console.log("Add match heroId not found ERROR")
+                response.status = 404;
+                response.message = "heroId not found:" + heroId;
+            }
+            else if (game) {
+                game.match.region = req.body.region;                
+                game.match.matchmaking = req.body.matchmaking;
+                game.match.winner = req.body.winner;
+
+                game.save(function (err, updatedGame) {
+                    const response = {
+                        status: 201,
+                        message: updatedGame,
+                    };
+
+                    if (err) {
+                        response.status = 500;
+                        response.message = err;
+                    }
+                    res.status(response.status).json(response.message);
+                });
+            }
+        });
 };
 
 
