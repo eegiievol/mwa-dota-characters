@@ -1,0 +1,12 @@
+[
+    {
+        "region": "Europe",
+        "matchmaking": "Ranked",
+        "winner": "Dire"
+    },
+    {
+        "region": "Usa",
+        "matchmaking": "Bots",
+        "winner": "Dire"
+    }
+]

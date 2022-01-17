@@ -12,7 +12,35 @@ getOne = function (req, res) {
 }
 
 getAll = function (req, res) {
-    console.log("get One called");
+
+    let count = parseInt(process.env.DEFAULT_FIND_LIMIT);
+    let offset = parseInt(process.env.DEFAULT_FIND_OFFSET);
+    const maxCount = parseInt(process.env.MAX_FIND_LIMIT);
+
+    if (req.query && req.query.offset) {
+        offset = parseInt(req.query.offset);
+    }
+    if (req.query && req.query.count) {
+        count = parseInt(req.query.count);
+    }
+
+    if (count > maxCount) {
+        console.log("Count exceeds maximum limit!!");
+        res
+            .status(400)
+            .json({ message: "Cannot exceed count limit of: " + maxCount });
+        return;
+    }
+
+    if (isNaN(offset) || isNaN(count)) {
+        console.log("offset or count is NOT number");
+        res
+            .status(400)
+            .json({ message: "QueryString offset and count must be digits" });
+        return;
+    }
+
+    console.log("get All called");
     Heroes.find().exec(function (err, heroesdata) {
         if (!err) {
             console.log("found a HEROES ..");
@@ -25,6 +53,29 @@ getAll = function (req, res) {
 
     })
 }
+
+deleteOne = function (req, res) {
+    const gameId = req.params.gameId;
+
+    if (!mongoose.isValidObjectId(gameId)) {
+        console.log("invalid ID detect");
+        res
+            .status(400)
+            .json({ message: "invalid ID detect" });
+        return;
+    }
+
+    Heroes.deleteOne({ _id: gameId }).exec(function (err) {
+
+        if (err) {
+            console.log("Failed to delete hero");
+            res.status(200).json(err);
+        }
+        else {
+            res.status(response.status).json("Successfully deleted the hero");
+        }
+    });
+};
 
 addOne = function (req, res) {
     console.log("Adding new Hero");
@@ -54,6 +105,7 @@ addOne = function (req, res) {
 module.exports = {
     getAll,
     getOne,
-    addOne
+    addOne,
+    deleteOne
 };
 
