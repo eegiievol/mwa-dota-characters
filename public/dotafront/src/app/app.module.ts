@@ -8,11 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HeroComponent } from './hero/hero.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeroesComponent
+    HeroesComponent,
+    HeroComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +30,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       {
         path: 'heroes',
         component: HeroesComponent
+      },
+      {
+        path: 'heroes/:id',
+        component: HeroComponent
       }
     ]),
     NgbModule

@@ -22,13 +22,13 @@ export class DotaServiceService {
       .catch(this.handleError);
   }
 
-  public getHeroe(heroid: string): Promise<HeroType[]> {
+  public getHero(heroid: string): Promise<HeroType> {
     console.log('get Heroe called');
-    const url: string = this.#apiBaseUrl + heroid;
+    const url: string = this.#apiBaseUrl + "/" + heroid;
     return this.http
       .get(url)
       .toPromise()
-      .then((response: any) => response as HeroType[])
+      .then((response: any) => response as HeroType)
       .catch(this.handleError);
   }
 
