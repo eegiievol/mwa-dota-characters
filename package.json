@@ -4,7 +4,7 @@
   "description": "Week1 PHP project",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon",
     "dev": "nodemon --inspect",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

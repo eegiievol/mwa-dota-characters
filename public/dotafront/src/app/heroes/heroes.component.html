@@ -1,0 +1,9 @@
+<h2>Heroes List</h2>
+<div class="list-group">
+  <a
+    *ngFor="let hero of heroes"
+    class="list-group-item list-group-item-action"
+    [routerLink]="['/heroes', hero._id]"
+    >{{ hero.name }}</a
+  >
+</div>
