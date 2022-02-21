@@ -1,9 +1,26 @@
-<h2>Heroes List</h2>
-<div class="list-group">
-  <a
-    *ngFor="let hero of heroes"
-    class="list-group-item list-group-item-action"
-    [routerLink]="['/heroes', hero._id]"
-    >{{ hero.name }}</a
-  >
+<div class="sidebar">
+
+  <form>
+    <h5>Add Hero:</h5>
+    <input [(ngModel)]="newHero.name" name="title" type="text" class="form-control" style="margin-bottom: 10px"
+      placeholder="Hero Name" />
+    <input [(ngModel)]="newHero.type" name="title" type="text" class="form-control" style="margin-bottom: 10px"
+      placeholder="Hero Type" />
+    <input [(ngModel)]="newHero.role" name="title" type="text" class="form-control" style="margin-bottom: 10px"
+      placeholder="Hero role" />
+    <button style="margin-bottom: 10px" (click)="addHero()" class="btn btn-primary">
+      Add Hero
+    </button>
+  </form>
+
+  <h5>Select Hero To Delete:</h5>
+  <select class="form-select" [(ngModel)]="hero" (ngModelChange)="onChangeObj($event)" name="sel3"
+    style="margin-bottom: 10px">
+    <option *ngFor="let h of heroes" [ngValue]="h">{{ h.name }}</option>
+  </select>
+  <button style="margin-bottom: 10px" class="btn btn-danger" (click)="deleteHero()">
+    Delete Hero
+  </button>
+
+
 </div>

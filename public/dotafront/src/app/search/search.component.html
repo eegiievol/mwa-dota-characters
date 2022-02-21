@@ -1,0 +1,31 @@
+<div class="find-container">
+    <h3>Search Hero:</h3>
+    <form class="row g-3">
+        <div class="col-auto">
+            <input [(ngModel)]="heroName" type="text" class="form-control" placeholder="Hero's name" name="heroName" />
+        </div>
+        <div class="col-auto">
+            <button (click)="searchHero()" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <h4 style="margin-top: 40px">Heroes count: {{ heroes.length }}:</h4>
+    <div class="col-lg-5">
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Total Matches</th>
+                </tr>
+            </thead>
+            <tr *ngFor="let x of heroes">
+                <td>
+                    {{ x.name }}
+                </td>
+                <td>
+                    {{ x.matches.length }}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

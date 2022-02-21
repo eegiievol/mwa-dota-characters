@@ -16,7 +16,7 @@ export class HeroComponent implements OnInit {
     private route: ActivatedRoute,
     private gameService: DotaServiceService
   ) {
-    this.hero = new HeroType('', '', false,'');
+    this.hero = new HeroType('', '', '', false, '', []);
   }
 
   ngOnInit(): void {

@@ -10,11 +10,16 @@ router.route("/heroes")
 
 router.route("/heroes/:heroId")
     .get(gamesControllers.getOne)
-    .delete(gamesControllers.deleteOne);
+    .delete(gamesControllers.deleteOne)
+    .put(gamesControllers.updateOne);
 
 router
     .route("/heroes/:heroId/match")
-    .get(matchesControllers.getOne)
+    .get(matchesControllers.getAll)
     .post(matchesControllers.addOne);
+
+router
+    .route("/heroes/:heroId/match/:matchId")
+    .delete(matchesControllers.deleteOne);
 
 module.exports = router;

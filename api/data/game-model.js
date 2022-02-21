@@ -38,7 +38,7 @@ const heroSchema = mongoose.Schema({
         type: String,
         required : true
     },
-    match: matchSchema
+    matches: [matchSchema]
 });
 
 mongoose.model(process.env.DB_HEROES_MODEL, heroSchema, "heroes");

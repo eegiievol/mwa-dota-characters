@@ -10,13 +10,17 @@ import { HeroesComponent } from './heroes/heroes.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeroComponent } from './hero/hero.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { MatchComponent } from './match/match.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroesComponent,
     HeroComponent,
-    NavigationComponent
+    NavigationComponent,
+    MatchComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +38,11 @@ import { NavigationComponent } from './navigation/navigation.component';
       {
         path: 'heroes/:id',
         component: HeroComponent
+      },
+      
+      {
+        path: 'search',
+        component: SearchComponent
       }
     ]),
     NgbModule

@@ -16,5 +16,17 @@
         "type": "Intelligence",
         "range": false,
         "role": "Midlaner"        
+    },
+    {
+        "name": "Centaur",
+        "type": "Strength",
+        "range": false,
+        "role": "Tanker"        
+    },
+    {
+        "name": "Mirana",
+        "type": "Agility",
+        "range": false,
+        "role": "Support"        
     }
 ]

@@ -8,13 +8,13 @@ import { HeroType } from './heroes/heroes.component';
 })
 export class DotaServiceService {
 
-  #apiBaseUrl: string = 'http://localhost:8080/api/heroes';
+  #apiBaseUrl: string = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) { }
 
   public getAllHeroes(): Promise<HeroType[]> {
     console.log('get All Heroes called');
-    const url: string = this.#apiBaseUrl;
+    const url: string = this.#apiBaseUrl + "/heroes";
     return this.http
       .get(url)
       .toPromise()
@@ -24,7 +24,39 @@ export class DotaServiceService {
 
   public getHero(heroid: string): Promise<HeroType> {
     console.log('get Heroe called');
-    const url: string = this.#apiBaseUrl + "/" + heroid;
+    const url: string = this.#apiBaseUrl + "/heroes/" + heroid;
+    return this.http
+      .get(url)
+      .toPromise()
+      .then((response: any) => response as HeroType)
+      .catch(this.handleError);
+  }
+
+  addHero(newHero: HeroType): Promise<HeroType> {
+    const url: string = this.#apiBaseUrl + '/heroes/';
+    return this.http
+      .post(url, {
+        name: newHero.name,
+        type: newHero.type,
+        range: newHero.range,
+        role: newHero.role
+      })
+      .toPromise()
+      .then((response: any) => response as HeroType[])
+      .catch(this.handleError);
+  }
+
+  delete(hero: HeroType): Promise<HeroType> {
+    const url: string = this.#apiBaseUrl + '/heroes/' + hero._id;
+    return this.http
+      .delete(url)
+      .toPromise()
+      .then((response: any) => response as HeroType[])
+      .catch(this.handleError);
+  }
+
+  searchByName(name: string): Promise<HeroType[]> {
+    const url: string = this.#apiBaseUrl + '/heroes?name=' + name;
     return this.http
       .get(url)
       .toPromise()
